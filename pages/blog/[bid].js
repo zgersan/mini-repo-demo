@@ -11,29 +11,29 @@ export async function getStaticPaths() {
 
   // const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
 
-    console.log("baseUrl ", baseUrl);
-    const resBlog = await fetch(`${baseUrl}/api/blogs`,{
-      headers:{'Content-Type':'application/json'}
-    })
+    // console.log("baseUrl ", baseUrl);
+    // const resBlog = await fetch(`${baseUrl}/api/blogs`,{
+    //   headers:{'Content-Type':'application/json'}
+    // })
 
-    const dataBlog = await resBlog.json()
+    // const dataBlog = await resBlog.json()
 
-    const paths = dataBlog.map((data)=>({
-        params: {bid:data._id},   
-    })); 
+    // const paths = dataBlog.map((data)=>({
+    //     params: {bid:data._id},   
+    // })); 
     
-    console.log("paths ", paths);
-    return { paths, fallback: false };
+    // console.log("paths ", paths);
+    // return { paths, fallback: false };
 
 
-    // return {
-    //   paths: [
-    //     { params: { pid: '5f8daaa072a73a07f96389fc' } },
-    //     { params: { pid: '5f8dad0c72a73a07f96389fd' } },
-    //     { params: { pid: '5f8dadc172a73a07f96389fe' } }
-    //   ],
-    //   fallback: false
-    // };
+    return {
+      paths: [
+        { params: { bid: '5f8daaa072a73a07f96389fc' } },
+        { params: { bid: '5f8dad0c72a73a07f96389fd' } },
+        { params: { bid: '5f8dadc172a73a07f96389fe' } }
+      ],
+      fallback: false
+    };
 }
   
 
