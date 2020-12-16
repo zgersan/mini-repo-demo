@@ -19,7 +19,10 @@ export default function BlogPage({blogs}) {
 export async function getStaticProps() {
 
     console.log("Blog sayfası getStaticProps içi ");
-    const resBlog = await fetch(`${baseUrl}/api/blogs`)
+    const resBlog = await fetch(`${baseUrl}/api/blogs`,{
+        headers:{'Content-Type':'application/json'}
+    });
+
     const dataBlog = await resBlog.json()
 
     console.log("dataBlog ", dataBlog);
