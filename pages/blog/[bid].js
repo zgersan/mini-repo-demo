@@ -41,26 +41,31 @@ export async function getStaticProps(context) {
 
   try
     {
-    dbConnect()
+    // dbConnect()
     const { bid } = context.params;
-    const response = await Blog.findOne({_id:bid})
-    const res = JSON.parse(JSON.stringify(response))
-    console.log("JSON.parse ", res);
+
+    // const response = await Blog.findOne({_id:bid})
+    // const res = JSON.parse(JSON.stringify(response))
+    // console.log("JSON.parse ", res);
 
     
-    // console.log("bid ", bid);
-    // const resBlog = await fetch(`${baseUrl}/api/blogs`,{
-    //   headers:{'Content-Type':'application/json'}
-    // })
-    // const dataBlog = await resBlog.json()
-    // console.log("resBlog ",dataBlog);
-    // const projectNameUnique = dataBlog.filter(item=>item._id==bid);
-    // console.log("deneme projectName", projectNameUnique[0].projectName);
+    console.log("bid ", bid);
+    const resBlog = await fetch(`${baseUrl}/api/blogs`,{
+      headers:{'Content-Type':'application/json'}
+    })
+    const dataBlog = await resBlog.json()
+    console.log("resBlog ",dataBlog);
+    const projectNameUnique = dataBlog.filter(item=>item._id==bid);
+    console.log("projectNameUnique title", projectNameUnique[0].title);
+
+    // console.log("projectNameUnique",projectNameUnique);
+    // console.log("deneme projectName projectName", projectNameUnique.projectName);
+    // console.log("deneme projectName projectNameUnique[0]", projectNameUnique[0].projectName);
 
     // const allProjectNameAsID = dataBlog.filter(item=>item.projectName==projectNameUnique[0].projectName)
     // console.log("allProjectNameAsID ", allProjectNameAsID);
 
-    // const res = projectNameUnique
+    const res = projectNameUnique
 
     return {
       props: { res },
@@ -120,7 +125,7 @@ export default function BlogDetail({res}) {
       <div className="container">
         <div className="row">
           <div className="col-md-8 blog-content">
-            <p className="lead">{res.title}</p>
+            <p className="lead">{res[0].title}</p>
             <p>{res.content}</p>
 
             {/* <blockquote><p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p></blockquote> */}
@@ -139,8 +144,8 @@ export default function BlogDetail({res}) {
             
             <div className="sidebar-box">
               {/* <img src={res.imagePost} alt="Free Website Template by Free-Template.co" className="img-fluid mb-4 w-50 rounded-circle"/> */}
-              <Image src={res.imagePost} className="img-fluid mb-4 w-50 rounded-circle" width={120} height={80}/>
-              <h3 className="text-black">{res.dateTime}</h3>
+              <Image src={res[0].imagePost} className="img-fluid mb-4 w-50 rounded-circle" width={120} height={80}/>
+              <h3 className="text-black">{res[0].dateTime}</h3>
               <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
               {/* <p><a href="#" className="btn btn-primary btn-md text-white">Read More</a></p> */}
             </div>
