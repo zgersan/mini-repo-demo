@@ -22,7 +22,9 @@ export async function getStaticProps() {
     // const resBlog = await fetch(`${baseUrl}/api/blogs`,{
     //     headers:{'Content-Type':'application/json'}
     // });
-    const resBlog = await fetch(`${process.env.BASE_URL}/api/blogs`,{
+    const url = `${process.env.BASE_URL}/api/blogs`
+    console.log("BASE_URL ", url);
+    const resBlog = await fetch('https://mini-repo-demo.zgersan.vercel.app/api/blogs',{
         headers:{'Content-Type':'application/json'}
       })
     const dataBlog = await resBlog.json()

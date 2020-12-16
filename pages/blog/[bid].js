@@ -15,7 +15,7 @@ export async function getStaticPaths() {
     //   headers:{'Content-Type':'application/json'}
     // })
 
-    const resBlog = await fetch(`${process.env.BASE_URL}/api/blogs`,{
+    const resBlog = await fetch('https://mini-repo-demo.zgersan.vercel.app/api/blogs',{
         headers:{'Content-Type':'application/json'}
       })
 
