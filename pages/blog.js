@@ -3,8 +3,8 @@ import React from 'react'
 import BlogPageImage from '../components/Blog/BlogPageImage/BlogPageImage'
 import BlogPosts from '../components/Blog/BlogPosts/BlogPosts'
 import baseUrl from '../helpers/baseUrl'
-// import Blog from '../models/Blog'
-
+import Blog from '../models/Blog'
+import dbConnect from '../services/database'
 
 export default function BlogPage({blogs}) {
     return (
@@ -17,22 +17,24 @@ export default function BlogPage({blogs}) {
 
 
 export async function getStaticProps() {
+    dbConnect()
 
     console.log("Blog sayfası getStaticProps içi ");
     // const resBlog = await fetch(`${baseUrl}/api/blogs`,{
     //     headers:{'Content-Type':'application/json'}
     // });
-    const url = `${process.env.BASE_URL}/api/blogs`
-    console.log("BASE_URL ", url);
-    const resBlog = await fetch('https://mini-repo-demo.zgersan.vercel.app/api/blogs',{
-        headers:{'Content-Type':'application/json'}
-      })
-    const dataBlog = await resBlog.json()
+    // const url = `${process.env.BASE_URL}/api/blogs`
+    // console.log("BASE_URL ", url);
+    // const resBlog = await fetch('https://mini-repo-demo.zgersan.vercel.app/api/blogs',{
+    //     headers:{'Content-Type':'application/json'}
+    //   })
 
-    console.log("dataBlog ", dataBlog);
+    // const dataBlog = await resBlog.json()
 
-    // const response = await Blog.find({isActive:true})
-    // const dataBlog = JSON.parse(JSON.stringify(response))
+    // console.log("dataBlog ", dataBlog);
+
+    const response = await Blog.find({isActive:true})
+    const dataBlog = JSON.parse(JSON.stringify(response))
 
     return {
         // props:{slayts:dataSlayt}

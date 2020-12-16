@@ -4,6 +4,7 @@ import Blog from '../../models/Blog'
 import ErrorPage from 'next/error'
 import Image from "next/image"
 // import fetch from 'isomorphic-unfetch'
+import dbConnect from '../../services/database'
 
 
 export async function getStaticPaths() {
@@ -11,15 +12,10 @@ export async function getStaticPaths() {
   // const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
 
     console.log("baseUrl ", baseUrl);
-    // const resBlog = await fetch(`${baseUrl}/api/blogs`,{
-    //   headers:{'Content-Type':'application/json'}
-    // })
+    const resBlog = await fetch(`${baseUrl}/api/blogs`,{
+      headers:{'Content-Type':'application/json'}
+    })
 
-    const resBlog = await fetch('https://mini-repo-demo.zgersan.vercel.app/api/blogs',{
-        headers:{'Content-Type':'application/json'}
-      })
-
-      
     const dataBlog = await resBlog.json()
 
     const paths = dataBlog.map((data)=>({
@@ -45,6 +41,7 @@ export async function getStaticProps(context) {
 
   try
     {
+    dbConnect()
     const { bid } = context.params;
     const response = await Blog.findOne({_id:bid})
     const res = JSON.parse(JSON.stringify(response))
