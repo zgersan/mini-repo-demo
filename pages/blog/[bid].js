@@ -11,10 +11,15 @@ export async function getStaticPaths() {
   // const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
 
     console.log("baseUrl ", baseUrl);
-    const resBlog = await fetch(`${baseUrl}/api/blogs`,{
-      headers:{'Content-Type':'application/json'}
-    })
+    // const resBlog = await fetch(`${baseUrl}/api/blogs`,{
+    //   headers:{'Content-Type':'application/json'}
+    // })
 
+    const resBlog = await fetch(`${process.env.BASE_URL}/api/blogs`,{
+        headers:{'Content-Type':'application/json'}
+      })
+
+      
     const dataBlog = await resBlog.json()
 
     const paths = dataBlog.map((data)=>({
